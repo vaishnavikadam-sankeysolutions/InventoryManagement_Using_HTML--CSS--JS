@@ -1,0 +1,408 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;600&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #1e1e1e;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: #121212;
+    color: #f0f0f0;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(165, 90, 90, 0.5);
+}
+
+header h1 {
+    font-size: 2.5em;
+    animation: fadeIn 2s ease-in-out, bounce 2s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header p {
+    margin: 0;
+    font-size: 1.2em;
+    animation: fadeIn 2s ease-in-out, bounce 2s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Center Header Content */
+header .header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Buttons */
+button {
+    background: #ff6f61;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+    background: #ff4b3a;
+    transform: scale(1.05);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+}
+
+/* Forms */
+form {
+    background: #292929;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    animation: slideInUp 0.5s ease-in-out;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ff6f61;
+}
+
+form input,
+form select {
+    width: calc(100% - 24px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 1em;
+    background: #1e1e1e;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+    margin-left: 12px;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #ff6f61;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #292929;
+    color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+}
+
+table thead {
+    background: #ff6f61;
+    color: #fff;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+}
+
+table th {
+    position: sticky;
+    top: 60px;
+    z-index: 1;
+}
+
+table tbody tr:hover {
+    background: #333;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Error Messages */
+.error-message {
+    color: #5144c7;
+    font-size: 0.9em;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    table th,
+    table td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        font-size: 1.2em;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table, 
+    table tbody, 
+    table tr, 
+    table td {
+        display: block;
+        width: 100%;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+        padding: 10px;
+        background: #333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+/* .animated-gif {
+    width: 150px;
+    height: auto;
+    margin-top: 20px;
+    animation: zoomIn 1s ease-in-out;
+  } */
+
+  .animated-gif {
+    max-width: 100%; /* Adjust maximum width */
+    max-height: 200px; /* Adjust maximum height */
+    width: auto;
+    height: auto;
+    margin-top: 20px;
+    animation: zoomIn 2s ease-in-out;
+  }
+
+  /* Heading for Add Product Details */
+.heading-add-product {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeInDown 1s ease-in-out;
+  }
+  
+  /* Heading for Place Your Order */
+  .heading-place-order {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeInDown 1s ease-in-out;
+  }
+
+  /* Button Styles */
+.button {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+/* Product List Container */
+#productList {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 80%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+      padding: 10px;
+      max-width: 20%;
+    }
+    
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  
+    .animated-heading {
+      font-size: 2rem;
+    }
+  
+    .animated-gif {
+      width: 100px;
+    }
+  
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: calc(100% - 20px);
+    }
+  }
+
+  .edit-button,
+  .delete-button {
+      /* Add your CSS rules for the buttons here */
+      /* For example: */
+      display: inline-block;
+      padding: 5px 10px;
+      font-size: 12px;
+      background-color: #ccc;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+  }
+
+  .calendar-icon {
+    color: white;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Invert the colors */
+  }
+
+  /* Adjust padding and font size for buttons */
+button#productSearchButton,
+button#sortProductsButton {
+    padding: 8px 16px; /* Adjust padding as needed */
+    font-size: 0.9em; /* Adjust font size as needed */
+}
+
+/* Adjust padding and font size for dropdowns */
+#sortField,
+#sortDirection,
+#orderSearchCriteria,
+#orderSortCriteria {
+    padding: 8px; /* Adjust padding as needed */
+    font-size: 0.9em; /* Adjust font size as needed */
+}
+
+#productSearchInput,
+#orderSearchInput {
+    padding: 8px; /* Adjust padding as needed */
+    font-size: 0.9em; /* Adjust font size as needed */
+}
+
+/* Flexbox container for search and sort */
+.search-and-sort-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+  }
+  
+  /* Container for search */
+  .search-container {
+    margin-right: 20px; /* Adjust margin as needed */
+  }
+  
+  /* Adjust sorting container width */
+  .sorting-container {
+    width: 50%; /* Adjust width as needed */
+  }
+  
+

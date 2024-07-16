@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory Management System</title>
+  <!-- <link rel="stylesheet" href="styles.css" /> -->
+  <!-- <script src="new.js"></script> -->
+  <link rel="stylesheet" href="styles2.css">
+</head>
+
+<body>
+  <!-- <video autoplay muted loop id="video-bg">
+    <source src="Smoke_18___45s___4k_res.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video> -->
+  <header>
+    <div class="header-content">
+      <h1>Inventory Management System</h1>
+      <p>Hello, <span id="usernameDisplay"></span>!!</p>
+      <img src="invenotry-grow.gif" alt="Animated Gif" class="animated-gif"><br>
+      <button id="viewProductsButton">Add Product</button>
+    </div>
+  </header>
+
+  <div class="search-and-sort-container">
+    <div class="sorting-container">
+      <!-- Sorting -->
+      <div>
+        <label for="sortField">Sort Field:</label>
+        <select id="sortField">
+          <option value="id">Product ID</option>
+          <option value="name">Product Name</option>
+          <option value="category">Category</option>
+          <option value="subCategory">Subcategory</option>
+          <option value="price">Price</option>
+          <option value="stockQuantity">Stock Quantity</option>
+          <option value="manufacturingDate">Manufacturing Date</option>
+          <option value="expiryDate">Expiry Date</option>
+        </select>
+
+        <label for="sortDirection">Sort Direction:</label>
+        <select id="sortDirection">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        <button id="sortProductsButton" onclick="sortProducts()">Sort</button>
+
+      </div>
+      </div>
+      <div class="search-container">
+
+        <!-- Search Input and Button for Products -->
+
+        <input type="text" id="productSearchInput" placeholder="Search for products...">
+        <button id="productSearchButton">Search</button>
+      </div>
+    </div>
+
+
+
+    <div class="form-container" style="display: none;">
+      <h2 class="heading-add-product">Add Product Details</h2>
+      <form id="productForm">
+        <div>
+          <label for="productId">Product ID:</label>
+          <input type="text" id="productId" required />
+          <div id="productIdError" class="error-message"></div>
+        </div>
+
+        <div>
+          <label for="productName">Product Name:</label>
+          <input type="text" id="productName" required pattern="^[a-zA-Z\s]+$">
+          <div id="productNameError" class="error-message"></div>
+        </div>
+
+        <div>
+          <label for="category">Category:</label>
+          <select id="category" name="category" onchange="updateSubCategoryOptions()">
+            <option value="">Select Category</option>
+            <option value="electronics">Electronics</option>
+            <option value="food">Food</option>
+            <option value="stationary">Stationary</option>
+          </select>
+          <div id="categoryError" class="error-message"></div>
+        </div>
+
+        <div>
+          <label for="subCategory">Sub Category:</label>
+          <select id="subCategory" name="subCategory" required>
+            <option value="">Select Subcategory</option>
+          </select>
+          <div id="subCategoryError" class="error-message"></div>
+        </div>
+
+        <div>
+          <label for="price">Price ($):</label>
+          <input type="number" id="price" min="0.01" step="0.01" required />
+          <div id="priceError" class="error-message"></div>
+        </div>
+        <div>
+          <label for="stockQuantity">Stock Quantity:</label>
+          <input type="number" id="stockQuantity" min="0" required />
+          <div id="stockQuantityError" class="error-message"></div>
+        </div>
+        <div>
+
+          <div>
+            <label for="manufacturingDate">Manufacturing Date:</label>
+            <input type="date" id="manufacturingDate" required />
+
+            <div id="manufacturingDateError" class="error-message"></div>
+          </div>
+          <div>
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="date" id="expiryDate" required />
+
+            <div id="expiryDateError" class="error-message"></div>
+          </div>
+
+          <!-- Existing Add button -->
+          <button type="submit">Add Product</button>
+
+      </form>
+    </div>
+    <div id="productList">Product list will be rendered here</div>
+
+    <button id="placeOrderButton" class="button">Place Order</button>
+    <button id="viewOrdersButton" class="button">View Orders</button>
+    <div id="orderFormContainer" style="display: none">
+
+      <!-- <button id="toggleOrderOptionsButton">Show/Hide Sorting and Searching Options</button> -->
+
+      <h2 class="heading-place-order">Place Your Order</h2>
+      <form id="orderForm">
+        <div>
+          <label for="orderProductId">Product ID:</label>
+          <select id="orderProductId" required>
+            <option value="">Select Product ID</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="orderProductName">Product Name:</label>
+          <input type="text" id="orderProductName" readonly />
+        </div>
+        <div>
+          <label for="orderCategory">Category:</label>
+          <input type="text" id="orderCategory" readonly />
+        </div>
+        <div>
+          <label for="orderSubCategory">Sub Category:</label>
+          <input type="text" id="orderSubCategory" readonly />
+        </div>
+        <div>
+          <label for="orderManufacturingDate">Manufacturing Date:</label>
+          <input type="date" id="orderManufacturingDate" readonly />
+        </div>
+        <div>
+          <label for="orderExpiryDate">Expiry Date:</label>
+          <input type="date" id="orderExpiryDate" readonly />
+        </div>
+        <div>
+          <label for="orderPrice">Price ($):</label>
+          <input type="number" id="orderPrice" readonly />
+        </div>
+        <div>
+          <label for="orderStockQuantity">Stock Quantity:</label>
+          <input type="number" id="orderStockQuantity" required />
+        </div>
+        <button type="submit">Place your order</button>
+      </form>
+    </div>
+    <div id="orderListContainer"></div>
+
+
+    <div id="sortOrders" style="display: none;">
+      <label for="orderSearchCriteria">Search By:</label>
+      <select id="orderSearchCriteria">
+        <option value="id">Product ID</option>
+        <option value="name">Product Name</option>
+        <option value="category">Category</option>
+        <option value="subCategory">Subcategory</option>
+        <option value="manufacturingDate">Manufacturing Date</option>
+        <option value="expiryDate">Expiry Date</option>
+      </select>
+      <input type="text" id="orderSearchInput" placeholder="Enter search keyword...">
+      <button id="orderSearchButton">Search</button>
+
+      <!-- Sorting  -->
+      <label for="orderSortCriteria">Sort By:</label>
+      <select id="orderSortCriteria">
+        <option value="id">Product ID</option>
+        <option value="name">Product Name</option>
+        <option value="category">Category</option>
+        <option value="subCategory">Subcategory</option>
+        <option value="manufacturingDate">Manufacturing Date</option>
+        <option value="expiryDate">Expiry Date</option>
+      </select>
+    </div>
+
+    <script src="new4.js"></script>
+</body>
+
+</html>
